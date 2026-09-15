@@ -6,8 +6,9 @@
 <title>Mayank Bhaskar — AI • Automation • Open Source</title>
 <meta name="description" content="Mayank Bhaskar (@qtjg) — ADHD-powered builder turning random ideas into useful software. AI agents, automation, terminals, open source.">
 <!--
-  MAYANK BHASKAR — PORTFOLIO v3.1 · "PAPER SCHEMATIC"
+  MAYANK BHASKAR — PORTFOLIO v3.4 · "PAPER SCHEMATIC / SIGNAL MATRIX"
   Paper + ink + signal orange · 3D ring carousel · schematic 3D scene · scroll engine
+  v3.4 skills redesign: signal meters · ink-sweep hover · scanline · ghost parallax · cursor spec-tag
   Single file · zero build · GitHub Pages ready
 -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
@@ -122,17 +123,49 @@ section{padding:clamp(80px,12vh,140px) 0;position:relative}
 .stat .l{font-family:var(--mono);font-size:.58rem;letter-spacing:.32em;color:var(--ink2);
   text-transform:uppercase;margin-top:8px}
 .stat:first-child .n{color:var(--acc)}
-/* ─── SKILLS ─── */
-#skills .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,4vw,60px);margin-top:50px}
+/* ─── SKILLS — SIGNAL MATRIX ─── */
+#skills{position:relative;overflow:hidden}
+#skills .ghost{position:absolute;top:56px;right:-2vw;z-index:0;font-family:var(--disp);
+  font-size:clamp(110px,17vw,250px);line-height:.8;letter-spacing:.02em;color:transparent;
+  -webkit-text-stroke:1.5px rgba(22,19,16,.085);pointer-events:none;user-select:none;will-change:transform}
+.sk-x{position:absolute;z-index:0;font-family:var(--mono);font-style:normal;font-size:15px;
+  color:var(--acc);opacity:.45;pointer-events:none;line-height:1}
+#skills .scanline{position:absolute;left:0;right:0;top:0;height:2px;z-index:3;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent 3%,var(--acc) 50%,transparent 97%)}
+#skills.scan .scanline{animation:skscan 1.5s cubic-bezier(.55,.1,.3,.9) .2s 1 both}
+@keyframes skscan{0%{top:4%;opacity:0}14%{opacity:.9}86%{opacity:.9}100%{top:95%;opacity:0}}
+#skills .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,4vw,60px);margin-top:50px;
+  position:relative;z-index:1}
 #skills h3{font-family:var(--mono);font-size:.62rem;letter-spacing:.34em;color:var(--acc);
-  text-transform:uppercase;margin-bottom:8px}
-.srow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-  padding:15px 2px;border-bottom:1px solid var(--hair);transition:.3s;
-  transform-origin:left}
-.srow:hover{border-color:var(--acc);padding-left:12px}
-.srow:hover .nm{transform:translateX(2px)}
-.srow .nm{font-family:var(--serif);font-size:1.32rem;transition:.3s}
-.srow .ix{font-family:var(--mono);font-size:.6rem;color:var(--ink2);letter-spacing:.15em}
+  text-transform:uppercase;margin-bottom:8px;position:relative;padding-bottom:12px;
+  display:flex;gap:9px;align-items:baseline}
+#skills h3::after{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--hair2)}
+#skills h3::before{content:'';position:absolute;left:0;bottom:0;width:100%;height:1.5px;background:var(--acc);
+  transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.2,.8,.2,1) .25s;z-index:1}
+#skills h3.on::before{transform:scaleX(1)}
+#skills .hix{font-family:var(--mono);font-style:normal;font-size:.55rem;color:var(--ink2);letter-spacing:.08em}
+.srow{position:relative;display:flex;align-items:center;gap:12px;padding:15px 10px 15px 2px;
+  border-bottom:1px solid var(--hair);transform-origin:left;isolation:isolate}
+.srow::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--ink);
+  transform:scaleX(0);transform-origin:left;transition:transform .42s cubic-bezier(.7,0,.3,1)}
+.srow:hover{border-color:var(--acc)}
+.srow:hover::before{transform:scaleX(1)}
+.srow .nm{font-family:var(--serif);font-size:1.32rem;transition:color .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.srow:hover .nm{color:var(--paper);transform:translateX(9px)}
+.srow .ix{font-family:var(--mono);font-size:.6rem;color:var(--ink2);letter-spacing:.15em;transition:color .3s}
+.srow:hover .ix{color:var(--acc)}
+.srow .meter{display:flex;align-items:flex-end;gap:3px;height:11px;margin-left:auto;margin-right:4px}
+.srow .meter i{width:4px;height:100%;background:var(--hair);transform:scaleY(.35);transform-origin:bottom;
+  transition:transform .55s cubic-bezier(.34,1.45,.45,1) var(--d,0s),background .35s,box-shadow .35s}
+.srow.on .meter i{transform:scaleY(1)}
+.srow .meter i.f{background:var(--acc)}
+.srow:hover .meter i.f{box-shadow:0 0 10px rgba(255,77,0,.65)}
+.srow:hover .meter i:not(.f){background:rgba(236,231,221,.25)}
+.sktag{position:fixed;z-index:70;pointer-events:none;font-family:var(--mono);font-size:.56rem;
+  letter-spacing:.16em;background:var(--ink);color:var(--paper);padding:7px 10px;
+  border-left:2px solid var(--acc);white-space:nowrap;opacity:0;transition:opacity .22s;
+  transform:translate(-50%,-190%)}
+.sktag.on{opacity:1}
 /* ─── 3D RING CAROUSEL ─── */
 #projects{overflow:hidden}
 .ring-scene{position:relative;height:560px;perspective:1500px;perspective-origin:50% 42%;
@@ -224,6 +257,10 @@ nav ul a.act{color:var(--acc)}
   .snum::after{transition:none;transform:scaleX(1)}
   #stage,.hero-left,.hero-right,.schem,.scrollhint,#forkGrid,.stats{transform:none!important;opacity:1!important}
   #veil{display:none}
+  #skills .scanline,.sktag{display:none}
+  #skills h3::before{transition:none;transform:scaleX(1)}
+  .srow .meter i{transform:scaleY(1);transition:none}
+  #skills .ghost{transform:none!important}
   .li{opacity:1;transform:none;transition:none}}
 /* ─── BACK-TO-TOP POINTER ─── */
 #topBtn{position:fixed;right:clamp(14px,3vw,26px);bottom:clamp(14px,3vw,26px);z-index:70;
@@ -268,6 +305,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
   .card3d{width:240px;height:390px;margin:-195px 0 0 -120px}
   .stamp{display:none}
 }
+@media (max-width:640px){#skills .ghost{display:none}.sk-x{opacity:.3}}
 </style>
 <!-- __CSS2__ -->
 </head>
@@ -345,13 +383,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
 </section>
 
 <section id="skills">
+  <div class="ghost" id="skGhost" aria-hidden="true">CRAFT</div>
+  <i class="sk-x" style="top:36px;left:4vw" aria-hidden="true">+</i>
+  <i class="sk-x" style="top:36px;right:4vw" aria-hidden="true">+</i>
+  <i class="sk-x" style="bottom:48px;left:4vw" aria-hidden="true">+</i>
+  <i class="sk-x" style="bottom:48px;right:4vw" aria-hidden="true">+</i>
+  <div class="scanline" aria-hidden="true"></div>
   <div class="wrap">
     <div class="snum rv">02 — SKILLS</div>
     <h2 class="serif-h wrev">Tools of <em>the craft</em></h2>
     <div class="cols">
-      <div><h3 class="rv">Languages</h3><div id="skLangs"></div></div>
-      <div><h3 class="rv">AI &amp; Agents</h3><div id="skAI"></div></div>
-      <div><h3 class="rv">Tools &amp; Frameworks</h3><div id="skTools"></div></div>
+      <div><h3 class="rv"><i class="hix">[01]</i>Languages</h3><div id="skLangs"></div></div>
+      <div><h3 class="rv"><i class="hix">[02]</i>AI &amp; Agents</h3><div id="skAI"></div></div>
+      <div><h3 class="rv"><i class="hix">[03]</i>Tools &amp; Frameworks</h3><div id="skTools"></div></div>
     </div>
   </div>
 </section>
@@ -409,18 +453,21 @@ const PROJECTS=[
  {n:'nexus-rag',l:'TYPESCRIPT',cmd:'nexus-rag index ./know',out:'forging… (WIP)',d:'The retrieval-augmented-generation wing of the Nexus platform — currently being forged.',t:['rag','ai','wip'],wip:true},
 ];
 const FORKS=[['sail','Spark replacement in Rust'],['bitcoin','Bitcoin Core — consensus-grade code'],['numpy','Scientific computing foundation'],['trivy','Vuln + secrets scanning at scale'],['realtime','Supabase WebSockets in Elixir'],['sphinx','The docs generator'],['auth','Supabase JWT API'],['dibs','Agent-to-agent messaging'],['bitchat','Bluetooth mesh chat'],['AutoVideo-Agent','Markdown → video pipeline'],['Ember','Terminal media player TUI'],['kana-dojo','Aesthetic Japanese learning'],['luminary-memory','Self-hosted AI memory layer'],['hackingtool','Security tooling breadth'],['OpenShoot','AI photo culling + retouch'],['OfflineCV','Private resume workbench']];
-const SK_LANGS=['Python','TypeScript','JavaScript','Go','Rust','C++','Swift','Elixir'];
-const SK_AI=['Ollama · local LLMs','MCP servers','RAG pipelines','Multi-agent routing','LLM red-teaming','Prompt engineering'];
-const SK_TOOLS=['Next.js','PyQt6','yt-dlp','Git & GitHub Actions','Zero-dependency builds','Terminal UX design'];
+const SK_LANGS=[['Python',5],['TypeScript',5],['JavaScript',5],['Go',4],['Rust',4],['C++',3],['Swift',3],['Elixir',3]];
+const SK_AI=[['Ollama · local LLMs',5],['MCP servers',5],['RAG pipelines',4],['Multi-agent routing',5],['LLM red-teaming',4],['Prompt engineering',5]];
+const SK_TOOLS=[['Next.js',5],['PyQt6',4],['yt-dlp',5],['Git & GitHub Actions',5],['Zero-dependency builds',4],['Terminal UX design',5]];
 const TYPE_LINES=['ADHD-POWERED BUILDER','AI & AUTOMATION DEV','OPEN SOURCE ENJOYER','SHIPS RANDOM IDEAS'];
 
 /* ═══════ RENDER ═══════ */
 const $=s=>document.querySelector(s);
-const marqItems=[...SK_LANGS,'OLLAMA','MCP','RAG','NEXT.JS','PYQT6','HEARTH','GITMANCER','NEXUS','VIBE-FORGE'];
+const marqItems=[...SK_LANGS,...SK_AI,...SK_TOOLS].map(s=>s[0]).concat(['HEARTH','GITMANCER','NEXUS','VIBE-FORGE']);
 $('#marq').innerHTML=[...marqItems,...marqItems].map(x=>`<span>${x}</span><i>✦</i>`).join('');
-$('#skLangs').innerHTML=SK_LANGS.map((s,i)=>`<div class="srow"><span class="nm">${s}</span><span class="ix">${String(i+1).padStart(2,'0')}</span></div>`).join('');
-$('#skAI').innerHTML=SK_AI.map((s,i)=>`<div class="srow"><span class="nm">${s}</span><span class="ix">${String(i+1).padStart(2,'0')}</span></div>`).join('');
-$('#skTools').innerHTML=SK_TOOLS.map((s,i)=>`<div class="srow"><span class="nm">${s}</span><span class="ix">${String(i+1).padStart(2,'0')}</span></div>`).join('');
+const skRow=([n,lv],i)=>`<div class="srow"><span class="nm">${n}</span><span class="meter" aria-hidden="true">${
+ [0,1,2,3,4].map(k=>`<i class="${k<lv?'f':''}" style="--d:${(k*.07).toFixed(2)}s"></i>`).join('')
+}</span><span class="ix">${String(i+1).padStart(2,'0')}</span></div>`;
+$('#skLangs').innerHTML=SK_LANGS.map(skRow).join('');
+$('#skAI').innerHTML=SK_AI.map(skRow).join('');
+$('#skTools').innerHTML=SK_TOOLS.map(skRow).join('');
 $('#forkGrid').innerHTML=FORKS.map(([n,d],i)=>`
  <a class="frow" href="https://github.com/qtjg/${n}" target="_blank" rel="noopener">
    <span class="ix">${String(i+1).padStart(2,'0')}</span><span class="nm">${n}</span><span class="ds">${d}</span></a>`).join('');
@@ -561,6 +608,22 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
      });
    }
  }
+ /* skills: scanline trigger + ghost watermark parallax + cursor spec-tag */
+ const skSec=$('#skills'),skGhost=$('#skGhost');let skVis=false;
+ new IntersectionObserver(es=>es.forEach(e=>skVis=e.isIntersecting),{rootMargin:'60px 0px'}).observe(skSec);
+ new IntersectionObserver((es,ob)=>es.forEach(e=>{
+   if(e.isIntersecting){skSec.classList.add('scan');ob.unobserve(skSec)}}),{threshold:.07}).observe(skSec);
+ if(!matchMedia('(pointer:coarse)').matches){
+   const tag=document.createElement('div');tag.className='sktag';document.body.appendChild(tag);
+   const cols=document.querySelector('#skills .cols');
+   cols.addEventListener('pointermove',e=>{
+     const row=e.target.closest('.srow');
+     if(row){tag.textContent=`SIG ${row.querySelectorAll('.meter i.f').length}/5 · ${row.querySelector('.nm').textContent.toUpperCase()}`;
+       tag.style.left=e.clientX+'px';tag.style.top=e.clientY+'px';tag.classList.add('on')}
+     else tag.classList.remove('on');
+   });
+   cols.addEventListener('pointerleave',()=>tag.classList.remove('on'));
+ }
  nav.addEventListener('click',()=>navLock=Date.now()+1600);
  if(reduced)return;
  /* scroll-linked frame loop */
@@ -600,6 +663,9 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
   /* ring micro-spin while projects on screen */
   const r=prSec.getBoundingClientRect();
   if(r.top<innerHeight&&r.bottom>0&&window.__ringSpin&&Math.abs(dy)>.2)window.__ringSpin(dy*.014);
+  /* skills ghost watermark parallax (visibility-gated) */
+  if(skVis){const sr=skSec.getBoundingClientRect();
+    skGhost.style.transform=`translate3d(0,${((sr.top+sr.height/2-innerHeight/2)*.09).toFixed(1)}px,0)`}
   /* scroll-reactive marquee: speeds up + reverses with scroll direction, pauses on hover */
   const hover=track.closest('.marq').matches(':hover');
   const tSpd=hover?0:(.9+av*.16)*(vel<-1?-1:1);
