@@ -6,8 +6,8 @@
 <title>Mayank Bhaskar — AI • Automation • Open Source</title>
 <meta name="description" content="Mayank Bhaskar (@qtjg) — ADHD-powered builder turning random ideas into useful software. AI agents, automation, terminals, open source.">
 <!--
-  MAYANK BHASKAR — PORTFOLIO v3 · "PAPER SCHEMATIC"
-  Paper + ink + signal orange · 3D ring carousel · schematic 3D scene
+  MAYANK BHASKAR — PORTFOLIO v3.1 · "PAPER SCHEMATIC"
+  Paper + ink + signal orange · 3D ring carousel · schematic 3D scene · scroll engine
   Single file · zero build · GitHub Pages ready
 -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
@@ -95,11 +95,9 @@ nav ul a:hover{color:var(--acc)}
 /* ─── MARQUEE (signal band) ─── */
 .marq{background:var(--acc);color:var(--paper);padding:14px 0;overflow:hidden;white-space:nowrap;
   transform:rotate(-1.2deg) scale(1.02);border-block:1.5px solid var(--ink)}
-.marq-track{display:inline-flex;animation:marq 26s linear infinite;will-change:transform}
-.marq:hover .marq-track{animation-play-state:paused}
+.marq-track{display:inline-flex;will-change:transform}
 .marq-track span{font-family:var(--disp);font-size:1.5rem;letter-spacing:.1em;padding:0 18px}
 .marq-track i{font-style:normal;padding:0 4px;font-size:1rem;line-height:2;opacity:.85}
-@keyframes marq{to{transform:translateX(-50%)}}
 /* ─── SECTION SCAFFOLD ─── */
 section{padding:clamp(80px,12vh,140px) 0;position:relative}
 .snum{font-family:var(--mono);font-size:.66rem;letter-spacing:.42em;color:var(--acc);
@@ -203,7 +201,23 @@ footer b{color:var(--acc);font-weight:400}
 .srow,.frow{opacity:0;transform:perspective(800px) rotateX(-24deg) translateY(14px);
   transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1),border-color .3s,padding .3s}
 .srow.on,.frow.on{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv,.rv3,.srow,.frow{transition:none;opacity:1;transform:none}}
+/* ─── SCROLL ANIMATION LAYER ─── */
+#sbar{position:fixed;top:0;left:0;width:100%;height:3px;z-index:80;background:var(--acc);
+  transform:scaleX(0);transform-origin:left;pointer-events:none}
+nav ul a.act{color:var(--acc)}
+.wrev .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
+.wrev .w i{display:inline-block;font-style:inherit;transform:translateY(120%) rotate(3deg);
+  transition:transform .9s cubic-bezier(.19,.74,.22,1);will-change:transform}
+.wrev.on .w i{transform:none}
+.frow:not(.on):nth-child(even){transform:perspective(800px) rotateX(-24deg) translateY(14px) translateX(38px)}
+.snum::after{transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.2,.7,.2,1) .2s}
+.snum.on::after{transform:scaleX(1)}
+#stage,.hero-left,.hero-right,.schem,.scrollhint,#forkGrid,.stats{will-change:transform,opacity}
+@media (prefers-reduced-motion:reduce){
+  .rv,.rv3,.srow,.frow{transition:none;opacity:1;transform:none}
+  .wrev .w i{transition:none;transform:none}
+  .snum::after{transition:none;transform:scaleX(1)}
+  #stage,.hero-left,.hero-right,.schem,.scrollhint,#forkGrid,.stats{transform:none!important;opacity:1!important}}
 /* ─── RESPONSIVE ─── */
 @media (max-width:960px){
   #hero .wrap{grid-template-columns:1fr}
@@ -219,6 +233,7 @@ footer b{color:var(--acc);font-weight:400}
 <!-- __CSS2__ -->
 </head>
 <body>
+<div id="sbar"></div>
 <div class="grain"></div>
 <nav>
   <a class="logo" href="#hero">M.</a>
@@ -262,7 +277,7 @@ footer b{color:var(--acc);font-weight:400}
     <div class="snum rv">01 — ABOUT</div>
     <div class="grid">
       <div class="left rv">
-        <h2 class="serif-h">I turn <em>random ideas</em> into useful software — from the terminal up to the last pixel.</h2>
+        <h2 class="serif-h wrev">I turn <em>random ideas</em> into useful software — from the terminal up to the last pixel.</h2>
         <p class="tagline">BUILD · BREAK · FIX · REBUILD</p>
       </div>
       <div class="about-body rv">
@@ -288,7 +303,7 @@ footer b{color:var(--acc);font-weight:400}
 <section id="skills">
   <div class="wrap">
     <div class="snum rv">02 — SKILLS</div>
-    <h2 class="serif-h rv">Tools of <em>the craft</em></h2>
+    <h2 class="serif-h wrev">Tools of <em>the craft</em></h2>
     <div class="cols">
       <div><h3 class="rv">Languages</h3><div id="skLangs"></div></div>
       <div><h3 class="rv">AI &amp; Agents</h3><div id="skAI"></div></div>
@@ -299,7 +314,7 @@ footer b{color:var(--acc);font-weight:400}
 <section id="projects">
   <div class="wrap">
     <div class="snum rv">03 — PROJECTS</div>
-    <h2 class="serif-h rv">Original <em>builds</em> — spin the wheel</h2>
+    <h2 class="serif-h wrev">Original <em>builds</em> — spin the wheel</h2>
   </div>
   <div class="ring-scene rv3" id="ringScene">
     <div class="ring" id="ring"></div>
@@ -316,7 +331,7 @@ footer b{color:var(--acc);font-weight:400}
 <section id="forks">
   <div class="wrap">
     <div class="snum rv">04 — OPEN SOURCE</div>
-    <h2 class="serif-h rv">Studying <em>the greats</em> — forked &amp; dissected</h2>
+    <h2 class="serif-h wrev">Studying <em>the greats</em> — forked &amp; dissected</h2>
     <div class="fgrid" id="forkGrid"></div>
   </div>
 </section>
@@ -324,7 +339,7 @@ footer b{color:var(--acc);font-weight:400}
 <section id="cta">
   <div class="wrap">
     <div class="snum rv" style="justify-content:center">05 — CONTACT</div>
-    <h2 class="serif-h rv">Got a wild idea?<br><em>Let's ship it.</em></h2>
+    <h2 class="serif-h wrev">Got a wild idea?<br><em>Let's ship it.</em></h2>
     <div class="row rv">
       <a class="btn solid" href="https://twitter.com/mayankbhaskarr" target="_blank" rel="noopener">SAY HELLO</a>
       <a class="btn ghost" href="https://github.com/qtjg" target="_blank" rel="noopener">GITHUB ↗</a>
@@ -425,6 +440,7 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
  scene.addEventListener('pointerup',end);scene.addEventListener('pointercancel',end);
  $('#rPrev').onclick=()=>{vel=-2.4;idle=-999};
  $('#rNext').onclick=()=>{vel=2.4;idle=-999};
+ window.__ringSpin=d=>{if(visible&&!dragging)spin(d)};
  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
  (function loop(){
   requestAnimationFrame(loop);
@@ -433,6 +449,88 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
    if(Math.abs(vel)>.001){spin(vel);vel*=.94;idle=0}
    else if(!reduced){idle++;if(idle>150)spin(.05)}
   }
+ })();
+})();
+</script>
+<script>
+/* ═══════ SCROLL ENGINE — progress bar · hero parallax · velocity skew · scroll-reactive marquee · nav spy ═══════ */
+(()=>{
+ const sbar=$('#sbar'),hero=$('#hero'),hl=$('.hero-left'),hr=$('.hero-right'),
+       st=$('#stage'),hint=$('.scrollhint'),s1=$('.schem.s1'),s2=$('.schem.s2'),
+       track=$('#marq'),forkG=$('#forkGrid'),stats=$('.stats'),prSec=$('#projects');
+ const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ /* nav section spy */
+ const nlinks=[...document.querySelectorAll('nav ul a')];
+ const nmap={hero:'#hero',about:'#about',skills:'#skills',projects:'#projects',forks:'#projects'};
+ const nio=new IntersectionObserver(es=>es.forEach(e=>{
+   if(!e.isIntersecting)return;
+   const href=nmap[e.target.id];
+   nlinks.forEach(a=>a.classList.toggle('act',href!=null&&a.getAttribute('href')===href));
+ }),{rootMargin:'-42% 0px -52% 0px'});
+ ['hero','about','skills','projects','forks'].forEach(id=>{
+   const s=document.getElementById(id);if(s)nio.observe(s)});
+ /* word-split heading reveal */
+ document.querySelectorAll('.wrev').forEach(el=>{
+   const walk=n=>{[...n.childNodes].forEach(ch=>{
+     if(ch.nodeType===3){
+       const f=document.createDocumentFragment();
+       ch.textContent.split(/(\s+)/).forEach(tk=>{
+         if(!tk)return;
+         if(/^\s+$/.test(tk)){f.appendChild(document.createTextNode(' '));return}
+         const w=document.createElement('span');w.className='w';
+         const i=document.createElement('i');i.textContent=tk;w.appendChild(i);f.appendChild(w);
+       });
+       n.replaceChild(f,ch);
+     }else if(ch.nodeType===1){walk(ch)}
+   })};
+   walk(el);
+   [...el.querySelectorAll('.w i')].forEach((i,ix)=>i.style.transitionDelay=(ix*.055).toFixed(3)+'s');
+ });
+ const wio=new IntersectionObserver(es=>es.forEach(e=>{
+   if(e.isIntersecting){e.target.classList.add('on');wio.unobserve(e.target)}
+ }),{threshold:.18});
+ document.querySelectorAll('.wrev').forEach(el=>wio.observe(el));
+ if(reduced)return;
+ /* scroll-linked frame loop */
+ let hh=hero.offsetHeight,half=track.scrollWidth/2||1;
+ const measure=()=>{hh=hero.offsetHeight;half=track.scrollWidth/2||half};
+ addEventListener('resize',measure);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
+ let sy=scrollY,lsy=sy,vel=0,mx=0,mSpd=0;
+ const skews=[[forkG,0],[stats,1]];
+ (function tick(){
+  requestAnimationFrame(tick);
+  sy=scrollY;
+  const dy=sy-lsy;lsy=sy;
+  vel+=(dy-vel)*.14;
+  const av=Math.min(Math.abs(vel),60);
+  const max=document.documentElement.scrollHeight-innerHeight;
+  sbar.style.transform=`scaleX(${max>0?(sy/max).toFixed(4):0})`;
+  /* hero parallax + fade-out */
+  if(sy<hh*1.25){
+   hl.style.transform=`translate3d(0,${(sy*.22).toFixed(1)}px,0)`;
+   hl.style.opacity=Math.max(0,1-sy/(hh*.72)).toFixed(3);
+   hr.style.transform=`translate3d(0,${(sy*.1).toFixed(1)}px,0)`;
+   hr.style.opacity=Math.max(0,1-sy/(hh*.9)).toFixed(3);
+   st.style.transform=`translate3d(0,${(sy*.32).toFixed(1)}px,0)`;
+   st.style.opacity=Math.max(0,1-sy/(hh*.95)).toFixed(3);
+   s1.style.transform=`translate3d(0,${(sy*-.07).toFixed(1)}px,0)`;
+   s2.style.transform=`translate3d(0,${(sy*-.13).toFixed(1)}px,0)`;
+   hint.style.opacity=Math.max(0,1-sy/220).toFixed(3);
+  }
+  /* scroll-velocity skew */
+  const sk=Math.max(-2.4,Math.min(2.4,vel*.045));
+  skews.forEach(([el,ph])=>{if(el)el.style.transform=`skewY(${(sk*(ph?-1:1)).toFixed(3)}deg)`});
+  /* ring micro-spin while projects on screen */
+  const r=prSec.getBoundingClientRect();
+  if(r.top<innerHeight&&r.bottom>0&&window.__ringSpin&&Math.abs(dy)>.2)window.__ringSpin(dy*.014);
+  /* scroll-reactive marquee: speeds up + reverses with scroll direction, pauses on hover */
+  const hover=track.closest('.marq').matches(':hover');
+  const tSpd=hover?0:(.9+av*.16)*(vel<-1?-1:1);
+  mSpd+=(tSpd-mSpd)*.07;
+  mx-=mSpd;
+  if(mx<=-half)mx+=half;if(mx>0)mx-=half;
+  track.style.transform=`translate3d(${mx.toFixed(1)}px,0,0)`;
  })();
 })();
 </script>
