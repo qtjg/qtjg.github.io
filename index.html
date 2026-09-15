@@ -42,14 +42,16 @@ nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:50;
   display:flex;align-items:center;gap:clamp(14px,3vw,34px);
   padding:9px 11px 9px 22px;border:1.5px solid var(--ink);border-radius:999px;
   background:rgba(236,231,221,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  box-shadow:4px 4px 0 var(--ink)}
+  box-shadow:4px 4px 0 var(--ink);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+nav.hide{transform:translateX(-50%) translateY(-130%)}
 nav .logo{font-family:var(--serif);font-size:1.35rem;font-weight:600}
 nav ul{display:flex;gap:clamp(12px,2.4vw,26px);list-style:none}
 nav ul a{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--ink2);transition:.25s}
 nav ul a:hover{color:var(--acc)}
 .navbtn{font-family:var(--body);font-weight:500;font-size:.85rem;color:var(--paper);
-  background:var(--ink);padding:9px 18px;border-radius:999px;transition:.3s}
-.navbtn:hover{background:var(--acc);transform:translateY(-2px) rotate(-1deg)}
+  background:var(--ink);padding:9px 18px;border-radius:999px;transition:.3s;
+  transform:translate(var(--mx,0px),var(--my,0px))}
+.navbtn:hover{background:var(--acc);transform:translate(var(--mx,0px),calc(var(--my,0px) - 2px)) rotate(-1deg)}
 /* ─── HERO ─── */
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
 #stage{position:absolute;inset:0;z-index:0}
@@ -70,11 +72,12 @@ nav ul a:hover{color:var(--acc)}
 .hero-p b{color:var(--ink);font-weight:500}
 .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .btn{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;padding:15px 26px;
-  border-radius:999px;transition:.3s;display:inline-flex;align-items:center;gap:10px}
+  border-radius:999px;transition:.3s;display:inline-flex;align-items:center;gap:10px;
+  transform:translate(var(--mx,0px),var(--my,0px))}
 .btn.solid{background:var(--ink);color:var(--paper);box-shadow:4px 4px 0 var(--acc)}
-.btn.solid:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--acc)}
+.btn.solid:hover{transform:translate(calc(var(--mx,0px) - 2px),calc(var(--my,0px) - 2px));box-shadow:7px 7px 0 var(--acc)}
 .btn.ghost{border:1.5px solid var(--ink);color:var(--ink)}
-.btn.ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper);transform:translate(var(--mx,0px),calc(var(--my,0px) - 3px))}
 .hero-right{display:flex;justify-content:center;position:relative}
 .schem{position:absolute;font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;
   color:var(--ink2);text-transform:uppercase}
@@ -140,8 +143,10 @@ section{padding:clamp(80px,12vh,140px) 0;position:relative}
 .card3d{position:absolute;top:50%;left:50%;width:300px;height:400px;margin:-200px 0 0 -150px;
   transform-style:preserve-3d;backface-visibility:hidden;background:var(--paper);
   border:1.5px solid var(--ink);border-radius:12px;overflow:hidden;
-  box-shadow:6px 7px 0 rgba(22,19,16,.85);transition:opacity .5s,filter .5s}
-.card3d .inner{position:absolute;inset:0;transform:translateZ(0)}
+  box-shadow:6px 7px 0 rgba(22,19,16,.85);transition:opacity .5s,filter .5s,box-shadow .4s}
+.card3d:hover{box-shadow:9px 11px 0 rgba(22,19,16,.85)}
+.card3d .inner{position:absolute;inset:0;transform:translateZ(0);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.card3d:hover .inner{transform:translateZ(26px)}
 .card3d .tcover{background:var(--ink);color:var(--paper);padding:15px 17px 18px;
   font-family:var(--mono);font-size:.7rem;line-height:1.9;min-height:118px;
   background-image:linear-gradient(rgba(236,231,221,.05) 1px,transparent 1px);background-size:100% 19px}
@@ -217,7 +222,9 @@ nav ul a.act{color:var(--acc)}
   .rv,.rv3,.srow,.frow{transition:none;opacity:1;transform:none}
   .wrev .w i{transition:none;transform:none}
   .snum::after{transition:none;transform:scaleX(1)}
-  #stage,.hero-left,.hero-right,.schem,.scrollhint,#forkGrid,.stats{transform:none!important;opacity:1!important}}
+  #stage,.hero-left,.hero-right,.schem,.scrollhint,#forkGrid,.stats{transform:none!important;opacity:1!important}
+  #veil{display:none}
+  .li{opacity:1;transform:none;transition:none}}
 /* ─── BACK-TO-TOP POINTER ─── */
 #topBtn{position:fixed;right:clamp(14px,3vw,26px);bottom:clamp(14px,3vw,26px);z-index:70;
   width:56px;height:56px;border-radius:50%;cursor:pointer;background:var(--paper);
@@ -233,6 +240,22 @@ nav ul a.act{color:var(--acc)}
 #topBtn svg.ring circle{fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;
   stroke-dasharray:163.4;stroke-dashoffset:163.4}
 #topBtn:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
+/* ─── FORK ROW ARROW ─── */
+.frow .fa{margin-left:10px;color:var(--acc);font-family:var(--mono);font-size:.8rem;
+  opacity:0;transform:translate(-8px,8px);transition:opacity .3s,transform .3s}
+.frow:hover .fa,.frow:focus-visible .fa{opacity:1;transform:none}
+/* ─── INTRO VEIL + LOAD-IN ─── */
+#veil{position:fixed;inset:0;z-index:90;pointer-events:none}
+#veil .vp{position:absolute;inset:0;animation:vpUp .7s cubic-bezier(.76,0,.24,1) forwards}
+#veil .vp.p1{background:var(--ink);animation-delay:.2s}
+#veil .vp.p2{background:var(--acc);animation-delay:.34s}
+@keyframes vpUp{to{transform:translateY(-101%)}}
+#veil .vm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--serif);font-weight:600;font-size:2rem;color:var(--paper);animation:vmFade .45s ease .5s forwards}
+@keyframes vmFade{to{opacity:0}}
+.li{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+body.loaded .li{opacity:1;transform:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 /* ─── RESPONSIVE ─── */
 @media (max-width:960px){
   #hero .wrap{grid-template-columns:1fr}
@@ -240,6 +263,7 @@ nav ul a.act{color:var(--acc)}
   #about .grid,#skills .cols,#forks .fgrid{grid-template-columns:1fr}
   nav ul{display:none}
   .frow .ds{display:none}
+  .frow .fa{margin-left:auto}
   .ring-scene{height:500px;perspective:1100px}
   .card3d{width:240px;height:390px;margin:-195px 0 0 -120px}
   .stamp{display:none}
@@ -249,6 +273,7 @@ nav ul a.act{color:var(--acc)}
 </head>
 <body>
 <div id="sbar"></div>
+<div id="veil" aria-hidden="true"><div class="vp p2"></div><div class="vp p1"></div><div class="vm">M.</div></div>
 <div class="grain"></div>
 <button id="topBtn" aria-label="Back to top" title="Back to top">
   <svg class="ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/></svg>
@@ -399,28 +424,31 @@ $('#skTools').innerHTML=SK_TOOLS.map((s,i)=>`<div class="srow"><span class="nm">
 $('#forkGrid').innerHTML=FORKS.map(([n,d],i)=>`
  <a class="frow" href="https://github.com/qtjg/${n}" target="_blank" rel="noopener">
    <span class="ix">${String(i+1).padStart(2,'0')}</span><span class="nm">${n}</span><span class="ds">${d}</span></a>`).join('');
+[...$('#forkGrid').children].forEach(f=>{const s=document.createElement('span');s.className='fa';s.textContent='↗';f.appendChild(s)});
 $('#ring').innerHTML=PROJECTS.map((p,i)=>`
  <article class="card3d" data-i="${i}">
-  <div class="num">${String(i+1).padStart(2,'0')}</div>
-  <div class="tcover"><div class="dots"><i></i><i></i><i></i></div>
+  <div class="inner">
+   <div class="num">${String(i+1).padStart(2,'0')}</div>
+   <div class="tcover"><div class="dots"><i></i><i></i><i></i></div>
     <div class="pr"><b>~/qtjg</b> $ ${p.cmd}</div>
     <div class="out">${p.out}<span class="cursor2"></span></div></div>
-  <div class="cbody">
+   <div class="cbody">
     <div class="crow"><h4>${p.n}</h4><span class="lang">${p.l}</span></div>
     <p>${p.d}</p>
     <div class="tags">${p.t.map(t=>`<i>${t}</i>`).join('')}</div>
     <div class="links"><a href="https://github.com/qtjg/${p.n}" target="_blank" rel="noopener">VIEW CODE →</a></div>
+   </div>
   </div>
  </article>`).join('');
 
 /* ═══════ TYPEWRITER ═══════ */
-(async()=>{const el=$('#typeTxt');let li=0;
+setTimeout(async()=>{const el=$('#typeTxt');let li=0;
  const wait=ms=>new Promise(r=>setTimeout(r,ms));
  for(;;){const w=TYPE_LINES[li%TYPE_LINES.length];
   for(let i=1;i<=w.length;i++){el.textContent=w.slice(0,i);await wait(55)}
   await wait(1900);
   for(let i=w.length;i>=0;i--){el.textContent=w.slice(0,i);await wait(26)}
-  await wait(350);li++}})();
+  await wait(350);li++}},900);
 
 /* ═══════ REVEAL + COUNTERS + STAGGER ═══════ */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
@@ -477,6 +505,7 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
  const sbar=$('#sbar'),hero=$('#hero'),hl=$('.hero-left'),hr=$('.hero-right'),
        st=$('#stage'),hint=$('.scrollhint'),s1=$('.schem.s1'),s2=$('.schem.s2'),
        track=$('#marq'),forkG=$('#forkGrid'),stats=$('.stats'),prSec=$('#projects');
+ const nav=$('nav');let navLock=0;
  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
  /* nav section spy */
  const nlinks=[...document.querySelectorAll('nav ul a')];
@@ -515,6 +544,24 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
  const updTop=p=>{ringC.style.strokeDashoffset=(RING*(1-p)).toFixed(2);
    topBtn.classList.toggle('show',scrollY>560)};
  if(reduced)addEventListener('scroll',()=>updTop(scrollY/((document.documentElement.scrollHeight-innerHeight)||1)),{passive:true});
+ /* intro veil wipe + hero load-in + magnetic buttons */
+ if(!reduced){
+   const lis=[...document.querySelectorAll('.hero-left>*,.hero-right>*')];
+   lis.forEach((el,i)=>{el.classList.add('li');el.style.transitionDelay=(.15+i*.09).toFixed(2)+'s'});
+   setTimeout(()=>{document.body.classList.add('loaded');
+     setTimeout(()=>lis.forEach(el=>el.style.transitionDelay='0s'),1500)},260);
+   setTimeout(()=>{const v=document.getElementById('veil');if(v)v.remove()},1700);
+   if(!matchMedia('(pointer:coarse)').matches){
+     document.querySelectorAll('.btn,.navbtn').forEach(b=>{
+       const rst=()=>{b.style.setProperty('--mx','0px');b.style.setProperty('--my','0px')};
+       b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();
+         b.style.setProperty('--mx',((e.clientX-r.left-r.width/2)*.25).toFixed(1)+'px');
+         b.style.setProperty('--my',((e.clientY-r.top-r.height/2)*.35).toFixed(1)+'px')});
+       b.addEventListener('pointerleave',rst);b.addEventListener('pointercancel',rst);
+     });
+   }
+ }
+ nav.addEventListener('click',()=>navLock=Date.now()+1600);
  if(reduced)return;
  /* scroll-linked frame loop */
  let hh=hero.offsetHeight,half=track.scrollWidth/2||1;
@@ -533,6 +580,8 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
   const p=max>0?sy/max:0;
   sbar.style.transform=`scaleX(${p.toFixed(4)})`;
   updTop(p);
+  /* auto-hide nav while scrolling down (unless a nav link was just clicked) */
+  if(Date.now()>navLock){if(sy>500&&dy>1.5)nav.classList.add('hide');else if(dy<-1.5||sy<300)nav.classList.remove('hide')}
   /* hero parallax + fade-out */
   if(sy<hh*1.25){
    hl.style.transform=`translate3d(0,${(sy*.22).toFixed(1)}px,0)`;
