@@ -9,6 +9,7 @@
   MAYANK BHASKAR — PORTFOLIO v3.4 · "PAPER SCHEMATIC / SIGNAL MATRIX"
   Paper + ink + signal orange · 3D ring carousel · schematic 3D scene · scroll engine
   v3.4 skills redesign: signal meters · ink-sweep hover · scanline · ghost parallax · cursor spec-tag
+  v3.5 forks "GREATS INDEX": same signal treatment — ink-sweep rows · GREATS ghost · scanline · orange indices · mono descs
   Single file · zero build · GitHub Pages ready
 -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
@@ -212,16 +213,30 @@ section{padding:clamp(80px,12vh,140px) 0;position:relative}
   background:transparent;color:var(--ink);font-size:1.15rem;cursor:pointer;transition:.3s}
 .ring-ui button:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
 .ring-ui .hint{font-family:var(--mono);font-size:.55rem;letter-spacing:.3em;color:var(--ink2)}
-/* ─── FORKS ─── */
-#forks .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,5vw,70px);margin-top:14px}
-.frow{display:flex;align-items:baseline;gap:18px;padding:16px 4px;
-  border-bottom:1px solid var(--hair);transition:.3s;transform-origin:left}
-.frow:hover{border-color:var(--acc);padding-left:14px}
-.frow .ix{font-family:var(--mono);font-size:.58rem;color:var(--ink2)}
-.frow .nm{font-family:var(--serif);font-size:1.28rem;font-weight:500;white-space:nowrap}
-.frow .ds{font-size:.8rem;color:var(--ink2);margin-left:auto;text-align:right;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:56%}
-.frow:hover .nm{color:var(--acc)}
+/* ─── FORKS — GREATS INDEX ─── */
+#forks{position:relative;overflow:hidden}
+#forks .ghost{position:absolute;top:44px;right:-2vw;z-index:0;font-family:var(--disp);
+  font-size:clamp(110px,17vw,250px);line-height:.8;letter-spacing:.02em;color:transparent;
+  -webkit-text-stroke:1.5px rgba(22,19,16,.085);pointer-events:none;user-select:none;will-change:transform}
+#forks .scanline{position:absolute;left:0;right:0;top:0;height:2px;z-index:3;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent 3%,var(--acc) 50%,transparent 97%)}
+#forks.scan .scanline{animation:skscan 1.5s cubic-bezier(.55,.1,.3,.9) .2s 1 both}
+#forks .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,5vw,70px);margin-top:14px;
+  position:relative;z-index:1}
+.frow{position:relative;display:flex;align-items:baseline;gap:18px;padding:16px 10px 16px 4px;
+  border-bottom:1px solid var(--hair);transform-origin:left;isolation:isolate;transition:border-color .3s}
+.frow::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--ink);
+  transform:scaleX(0);transform-origin:left;transition:transform .42s cubic-bezier(.7,0,.3,1)}
+.frow:hover{border-color:var(--acc)}
+.frow:hover::before,.frow:focus-visible::before{transform:scaleX(1)}
+.frow .ix{font-family:var(--mono);font-size:.58rem;color:var(--acc);letter-spacing:.08em}
+.frow .nm{font-family:var(--serif);font-size:1.28rem;font-weight:500;white-space:nowrap;
+  transition:color .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.frow .ds{font-family:var(--mono);font-size:.66rem;color:var(--ink2);margin-left:auto;text-align:right;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:56%;
+  transition:color .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.frow:hover .nm,.frow:focus-visible .nm{color:var(--paper);transform:translateX(9px)}
+.frow:hover .ds,.frow:focus-visible .ds{color:rgba(236,231,221,.72);transform:translateX(-9px)}
 /* ─── CTA / FOOTER ─── */
 #cta{text-align:center;padding-bottom:60px}
 #cta .serif-h{font-size:clamp(2.6rem,6vw,4.6rem)}
@@ -260,7 +275,8 @@ nav ul a.act{color:var(--acc)}
   #skills .scanline,.sktag{display:none}
   #skills h3::before{transition:none;transform:scaleX(1)}
   .srow .meter i{transform:scaleY(1);transition:none}
-  #skills .ghost{transform:none!important}
+  #skills .ghost,#forks .ghost{transform:none!important}
+  #forks .scanline{display:none}
   .li{opacity:1;transform:none;transition:none}}
 /* ─── BACK-TO-TOP POINTER ─── */
 #topBtn{position:fixed;right:clamp(14px,3vw,26px);bottom:clamp(14px,3vw,26px);z-index:70;
@@ -305,7 +321,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
   .card3d{width:240px;height:390px;margin:-195px 0 0 -120px}
   .stamp{display:none}
 }
-@media (max-width:640px){#skills .ghost{display:none}.sk-x{opacity:.3}}
+@media (max-width:640px){#skills .ghost,#forks .ghost{display:none}.sk-x{opacity:.3}}
 </style>
 <!-- __CSS2__ -->
 </head>
@@ -417,6 +433,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
 </section>
 
 <section id="forks">
+  <div class="ghost" id="fkGhost" aria-hidden="true">GREATS</div>
+  <i class="sk-x" style="top:36px;left:4vw" aria-hidden="true">+</i>
+  <i class="sk-x" style="top:36px;right:4vw" aria-hidden="true">+</i>
+  <i class="sk-x" style="bottom:48px;left:4vw" aria-hidden="true">+</i>
+  <i class="sk-x" style="bottom:48px;right:4vw" aria-hidden="true">+</i>
+  <div class="scanline" aria-hidden="true"></div>
   <div class="wrap">
     <div class="snum rv">04 — OPEN SOURCE</div>
     <h2 class="serif-h wrev">Studying <em>the greats</em> — forked &amp; dissected</h2>
@@ -608,21 +630,29 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
      });
    }
  }
- /* skills: scanline trigger + ghost watermark parallax + cursor spec-tag */
- const skSec=$('#skills'),skGhost=$('#skGhost');let skVis=false;
+ /* skills + forks: scanline triggers, ghost parallax targets, cursor spec-tag */
+ const skSec=$('#skills'),skGhost=$('#skGhost'),fkSec=$('#forks'),fkGhost=$('#fkGhost');
+ let skVis=false,fkVis=false;
  new IntersectionObserver(es=>es.forEach(e=>skVis=e.isIntersecting),{rootMargin:'60px 0px'}).observe(skSec);
  new IntersectionObserver((es,ob)=>es.forEach(e=>{
    if(e.isIntersecting){skSec.classList.add('scan');ob.unobserve(skSec)}}),{threshold:.07}).observe(skSec);
+ new IntersectionObserver(es=>es.forEach(e=>fkVis=e.isIntersecting),{rootMargin:'60px 0px'}).observe(fkSec);
+ new IntersectionObserver((es,ob)=>es.forEach(e=>{
+   if(e.isIntersecting){fkSec.classList.add('scan');ob.unobserve(fkSec)}}),{threshold:.07}).observe(fkSec);
  if(!matchMedia('(pointer:coarse)').matches){
    const tag=document.createElement('div');tag.className='sktag';document.body.appendChild(tag);
-   const cols=document.querySelector('#skills .cols');
-   cols.addEventListener('pointermove',e=>{
-     const row=e.target.closest('.srow');
-     if(row){tag.textContent=`SIG ${row.querySelectorAll('.meter i.f').length}/5 · ${row.querySelector('.nm').textContent.toUpperCase()}`;
-       tag.style.left=e.clientX+'px';tag.style.top=e.clientY+'px';tag.classList.add('on')}
-     else tag.classList.remove('on');
-   });
-   cols.addEventListener('pointerleave',()=>tag.classList.remove('on'));
+   const wire=(zone,txt)=>{
+     zone.addEventListener('pointermove',e=>{
+       const row=e.target.closest('.srow,.frow');
+       if(row){tag.textContent=txt(row);tag.style.left=e.clientX+'px';tag.style.top=e.clientY+'px';tag.classList.add('on')}
+       else tag.classList.remove('on');
+     });
+     zone.addEventListener('pointerleave',()=>tag.classList.remove('on'));
+   };
+   wire(document.querySelector('#skills .cols'),row=>
+     `SIG ${row.querySelectorAll('.meter i.f').length}/5 · ${row.querySelector('.nm').textContent.toUpperCase()}`);
+   wire($('#forkGrid'),row=>
+     `FORK ${row.querySelector('.ix').textContent} · GITHUB/QTJG/${row.querySelector('.nm').textContent.toUpperCase()}`);
  }
  nav.addEventListener('click',()=>navLock=Date.now()+1600);
  if(reduced)return;
@@ -663,9 +693,11 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
   /* ring micro-spin while projects on screen */
   const r=prSec.getBoundingClientRect();
   if(r.top<innerHeight&&r.bottom>0&&window.__ringSpin&&Math.abs(dy)>.2)window.__ringSpin(dy*.014);
-  /* skills ghost watermark parallax (visibility-gated) */
+  /* skills/forks ghost watermark parallax (visibility-gated) */
   if(skVis){const sr=skSec.getBoundingClientRect();
     skGhost.style.transform=`translate3d(0,${((sr.top+sr.height/2-innerHeight/2)*.09).toFixed(1)}px,0)`}
+  if(fkVis){const fr=fkSec.getBoundingClientRect();
+    fkGhost.style.transform=`translate3d(0,${((fr.top+fr.height/2-innerHeight/2)*.09).toFixed(1)}px,0)`}
   /* scroll-reactive marquee: speeds up + reverses with scroll direction, pauses on hover */
   const hover=track.closest('.marq').matches(':hover');
   const tSpd=hover?0:(.9+av*.16)*(vel<-1?-1:1);
