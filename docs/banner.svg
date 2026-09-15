@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="Mayank Bhaskar 3D portfolio banner">
+<defs><pattern id="gr" width="40" height="40" patternUnits="userSpaceOnUse">
+<path d="M40 0H0V40" fill="none" stroke="#161310" stroke-opacity="0.06" stroke-width="1"/>
+</pattern></defs>
+<rect width="1200" height="420" fill="#ece7dd"/>
+<rect width="1200" height="420" fill="url(#gr)"/>
+<rect x="0" y="0" width="1200" height="5" fill="#ff4d00"/>
+<g stroke="#161310" stroke-width="1.6" stroke-linejoin="round">
+    <polygon points="820,150 882,181.0 820,212 758,181.0" fill="#f4f0e8"/>
+    <polygon points="758,181.0 820,212 820,290 758,259.0" fill="#1b1712"/>
+    <polygon points="882,181.0 820,212 820,290 882,259.0" fill="#3a3229"/>
+    <polygon points="820,150 882,181.0 820,212 758,181.0" fill="none" stroke="#ff4d00" stroke-width="2.2"/>
+  </g>
+<g stroke="#161310" stroke-width="1.6" stroke-linejoin="round">
+    <polygon points="985,210 1047,241.0 985,272 923,241.0" fill="#f4f0e8"/>
+    <polygon points="923,241.0 985,272 985,350 923,319.0" fill="#1b1712"/>
+    <polygon points="1047,241.0 985,272 985,350 1047,319.0" fill="#3a3229"/>
+    <polygon points="985,210 1047,241.0 985,272 923,241.0" fill="none" stroke="#ff4d00" stroke-width="2.2"/>
+  </g>
+<g stroke="#161310" stroke-width="1.6" stroke-linejoin="round">
+    <polygon points="655,210 717,241.0 655,272 593,241.0" fill="#f4f0e8"/>
+    <polygon points="593,241.0 655,272 655,350 593,319.0" fill="#1b1712"/>
+    <polygon points="717,241.0 655,272 655,350 717,319.0" fill="#3a3229"/>
+    <polygon points="655,210 717,241.0 655,272 593,241.0" fill="none" stroke="#ff4d00" stroke-width="2.2"/>
+  </g>
+<path d="M717,290 L783,240" stroke="#ff4d00" stroke-width="2.5" stroke-dasharray="7 6" fill="none"/>
+<path d="M882,240 L948,290" stroke="#ff4d00" stroke-width="2.5" stroke-dasharray="7 6" fill="none"/>
+<g stroke="#ff4d00" stroke-width="1.6" stroke-linejoin="round">
+    <polygon points="902,96 924,107.0 902,118 880,107.0" fill="#ffd9c4"/>
+    <polygon points="880,107.0 902,118 902,144 880,133.0" fill="#ff4d00"/>
+    <polygon points="924,107.0 902,118 902,144 924,133.0" fill="#b53500"/>
+    <polygon points="902,96 924,107.0 902,118 880,107.0" fill="none" stroke="#ff4d00" stroke-width="2.2"/>
+  </g>
+<path d="M902,144 V118" stroke="#ff4d00" stroke-width="1.8" stroke-dasharray="4 4"/>
+<text x="655" y="380" font-family="IBM Plex Mono,Consolas,monospace" font-size="15" letter-spacing="3" fill="#161310" text-anchor="middle" font-weight="600">3D HERO SCENE</text>
+<text x="820" y="320" font-family="IBM Plex Mono,Consolas,monospace" font-size="15" letter-spacing="3" fill="#161310" text-anchor="middle" font-weight="600">RING ×10 BUILDS</text>
+<text x="985" y="380" font-family="IBM Plex Mono,Consolas,monospace" font-size="15" letter-spacing="3" fill="#161310" text-anchor="middle" font-weight="600">SIGNAL MATRIX</text>
+<text x="70" y="150" font-family="Arial Black,Arial,sans-serif" font-size="64" letter-spacing="2" fill="#161310" font-weight="900">MAYANK BHASKAR</text>
+<text x="72" y="196" font-family="IBM Plex Mono,Consolas,monospace" font-size="19" letter-spacing="5" fill="#ff4d00" font-weight="600">PORTFOLIO — PAPER SCHEMATIC</text>
+<text x="72" y="232" font-family="IBM Plex Mono,Consolas,monospace" font-size="14" letter-spacing="3" fill="#161310" opacity="0.62">THREE.JS · 3D RING CAROUSEL · SCROLL ENGINE · ZERO BUILD</text>
+<rect x="72" y="258" width="360" height="3" fill="#ff4d00"/>
+<rect x="940" y="58" width="196" height="34" fill="none" stroke="#161310" stroke-width="1.8" rx="17"/>
+<text x="1038" y="80" font-family="IBM Plex Mono,Consolas,monospace" font-size="14" letter-spacing="2" fill="#161310" text-anchor="middle">qtjg.github.io</text>
+<path d="M39,46 H53 M46,39 V53" stroke="#ff4d00" stroke-width="2" opacity=".8"/>
+<path d="M1147,26 H1161 M1154,19 V33" stroke="#ff4d00" stroke-width="2" opacity=".8"/>
+<path d="M39,374 H53 M46,367 V381" stroke="#ff4d00" stroke-width="2" opacity=".8"/>
+<path d="M1147,60 H1161 M1154,53 V67" stroke="#ff4d00" stroke-width="2" opacity=".8"/>
+<text x="72" y="382" font-family="IBM Plex Mono,Consolas,monospace" font-size="13" letter-spacing="2" fill="#161310" opacity="0.55">SINGLE FILE · NO BUILD · GITHUB PAGES</text>
+</svg>
