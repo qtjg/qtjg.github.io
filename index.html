@@ -218,6 +218,21 @@ nav ul a.act{color:var(--acc)}
   .wrev .w i{transition:none;transform:none}
   .snum::after{transition:none;transform:scaleX(1)}
   #stage,.hero-left,.hero-right,.schem,.scrollhint,#forkGrid,.stats{transform:none!important;opacity:1!important}}
+/* ─── BACK-TO-TOP POINTER ─── */
+#topBtn{position:fixed;right:clamp(14px,3vw,26px);bottom:clamp(14px,3vw,26px);z-index:70;
+  width:56px;height:56px;border-radius:50%;cursor:pointer;background:var(--paper);
+  border:1.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(18px) scale(.85);pointer-events:none;
+  transition:opacity .35s,transform .35s cubic-bezier(.2,.7,.2,1),background .25s,box-shadow .25s}
+#topBtn.show{opacity:1;transform:none;pointer-events:auto}
+#topBtn:hover{background:var(--ink);box-shadow:6px 6px 0 var(--acc)}
+#topBtn .arr{color:var(--ink);transition:color .25s,transform .25s}
+#topBtn:hover .arr{color:var(--paper);transform:translateY(-3px)}
+#topBtn svg.ring{position:absolute;inset:-1.5px;width:calc(100% + 3px);height:calc(100% + 3px);transform:rotate(-90deg)}
+#topBtn svg.ring circle{fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:163.4;stroke-dashoffset:163.4}
+#topBtn:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
 /* ─── RESPONSIVE ─── */
 @media (max-width:960px){
   #hero .wrap{grid-template-columns:1fr}
@@ -235,6 +250,10 @@ nav ul a.act{color:var(--acc)}
 <body>
 <div id="sbar"></div>
 <div class="grain"></div>
+<button id="topBtn" aria-label="Back to top" title="Back to top">
+  <svg class="ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/></svg>
+  <svg class="arr" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 <nav>
   <a class="logo" href="#hero">M.</a>
   <ul>
@@ -490,6 +509,12 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
    if(e.isIntersecting){e.target.classList.add('on');wio.unobserve(e.target)}
  }),{threshold:.18});
  document.querySelectorAll('.wrev').forEach(el=>wio.observe(el));
+ /* back-to-top pointer with circular progress ring */
+ const topBtn=$('#topBtn'),ringC=topBtn.querySelector('circle'),RING=163.4;
+ topBtn.onclick=()=>scrollTo({top:0,behavior:reduced?'auto':'smooth'});
+ const updTop=p=>{ringC.style.strokeDashoffset=(RING*(1-p)).toFixed(2);
+   topBtn.classList.toggle('show',scrollY>560)};
+ if(reduced)addEventListener('scroll',()=>updTop(scrollY/((document.documentElement.scrollHeight-innerHeight)||1)),{passive:true});
  if(reduced)return;
  /* scroll-linked frame loop */
  let hh=hero.offsetHeight,half=track.scrollWidth/2||1;
@@ -505,7 +530,9 @@ document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
   vel+=(dy-vel)*.14;
   const av=Math.min(Math.abs(vel),60);
   const max=document.documentElement.scrollHeight-innerHeight;
-  sbar.style.transform=`scaleX(${max>0?(sy/max).toFixed(4):0})`;
+  const p=max>0?sy/max:0;
+  sbar.style.transform=`scaleX(${p.toFixed(4)})`;
+  updTop(p);
   /* hero parallax + fade-out */
   if(sy<hh*1.25){
    hl.style.transform=`translate3d(0,${(sy*.22).toFixed(1)}px,0)`;
